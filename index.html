@@ -1,0 +1,1739 @@
+<meta charset="utf-8">
+<title>Al Majid Group Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,700&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+
+<script>document.documentElement.classList.add("js");</script>
+
+<style>
+/* ============================================================
+   AL MAJID — GROUP SITE CONCEPT
+   Design system: "Manifest"
+   ============================================================ */
+
+:root{
+  /* ground */
+  --ink:        #0C1113;
+  --ink-2:      #141B1E;
+  --ink-3:      #1C2427;
+  --paper:      #EFEDE6;
+  --paper-2:    #E2DFD5;
+
+  /* accent */
+  --brass:      #C4913F;
+  --brass-lo:   #8E6726;
+  --brass-hi:   #E3BE7C;
+
+  /* type on dark */
+  --on-ink:     #F3F1EC;
+  --on-ink-mid: #A6AFB2;
+  --on-ink-dim: #6C777B;
+  --rule-ink:   rgba(243,241,236,.14);
+  --rule-ink-s: rgba(243,241,236,.07);
+
+  /* type on paper */
+  --on-paper:     #10171A;
+  --on-paper-mid: #55605F;
+  --rule-paper:   rgba(16,23,26,.16);
+  --rule-paper-s: rgba(16,23,26,.08);
+
+  /* type */
+  --display: "Bodoni Moda", "Didot", "Times New Roman", serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  --arabic: "IBM Plex Sans Arabic", "Noto Sans Arabic", sans-serif;
+
+  /* metrics */
+  --gut: clamp(20px, 4.5vw, 64px);
+  --maxw: 1360px;
+  --sec-y: clamp(72px, 9vw, 148px);
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+[hidden]{ display:none !important; }
+html{ scroll-behavior:smooth; }
+section[id], footer[id]{ scroll-margin-top:88px; }
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--on-ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+
+/* grain — one shared decorative layer, non-interactive */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:9;
+  pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img{ max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+
+:focus-visible{
+  outline:2px solid var(--brass);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* --- Arabic / RTL ------------------------------------------------ */
+html[dir="rtl"] body{ font-family:var(--arabic); }
+html[dir="rtl"] .display,
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+html[dir="rtl"] .row-name, html[dir="rtl"] .values .n,
+html[dir="rtl"] .quote p, html[dir="rtl"] .card h3,
+html[dir="rtl"] .foot-mark{
+  font-family:var(--arabic);
+  font-weight:600;
+  letter-spacing:0;
+  line-height:1.28;
+}
+html[dir="rtl"] .mono, html[dir="rtl"] .eyebrow, html[dir="rtl"] .lbl,
+html[dir="rtl"] .chip, html[dir="rtl"] .row-code, html[dir="rtl"] .foot h4{
+  font-family:var(--arabic); letter-spacing:0; font-size:11.5px;
+}
+/* figures and years stay in the ledger face — numerals read better set */
+html[dir="rtl"] .ledger .fig, html[dir="rtl"] .stop .yr,
+html[dir="rtl"] .facts li span:last-child{ font-family:var(--display); }
+html[dir="rtl"] .marquee .mq-track span{ font-family:var(--display); }
+html[dir="rtl"] .hero-h1{ max-width:18ch; }
+
+/* ============================================================
+   TYPE SCALE
+   ============================================================ */
+.display{
+  font-family:var(--display);
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+  margin:0;
+}
+.d-xl{ font-size:clamp(46px, 8.4vw, 132px); }
+.d-lg{ font-size:clamp(34px, 5.2vw, 74px); }
+.d-md{ font-size:clamp(26px, 3.1vw, 44px); }
+
+.lede{
+  font-size:clamp(17px, 1.35vw, 21px);
+  line-height:1.55;
+  color:var(--on-ink-mid);
+  max-width:60ch;
+  margin:0;
+}
+
+.mono{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin:0;
+}
+
+.body-copy{ max-width:64ch; color:var(--on-ink-mid); margin:0; }
+.body-copy + .body-copy{ margin-top:1.1em; }
+
+/* ============================================================
+   LAYOUT PRIMITIVES
+   ============================================================ */
+.wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:var(--gut);
+}
+.sec{ padding-block:var(--sec-y); position:relative; }
+
+.sec-head{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(20px,4vw,72px);
+  align-items:flex-end;
+  justify-content:space-between;
+  padding-block-end:clamp(28px,3.4vw,52px);
+}
+.sec-head .sec-title{ flex:1 1 min(520px,100%); }
+
+.rule{ height:1px; background:var(--rule-ink); border:0; margin:0; }
+
+.paper{ background:var(--paper); color:var(--on-paper); }
+.paper .lede,.paper .body-copy{ color:var(--on-paper-mid); }
+.paper .rule{ background:var(--rule-paper); }
+.paper .eyebrow{ color:var(--brass-lo); }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:60;
+  background:rgba(12,17,19,.72);
+  backdrop-filter:blur(14px) saturate(140%);
+  border-block-end:1px solid var(--rule-ink-s);
+  transition:background .3s var(--ease);
+}
+.nav-in{
+  display:flex; align-items:center; gap:clamp(16px,3vw,48px);
+  height:68px;
+}
+.brand{
+  display:flex; align-items:baseline; gap:10px;
+  margin-inline-end:auto;
+  white-space:nowrap;
+}
+.brand-mark{
+  font-family:var(--display);
+  font-size:20px; letter-spacing:.01em; font-weight:500;
+}
+.brand-sub{
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--on-ink-dim);
+}
+.nav-links{ display:flex; gap:clamp(14px,2vw,32px); align-items:center; }
+.nav-links a{
+  font-size:13px; letter-spacing:.02em; color:var(--on-ink-mid);
+  padding-block:6px; position:relative;
+  transition:color .25s var(--ease);
+}
+.nav-links a::after{
+  content:""; position:absolute; inset-inline:0; bottom:0; height:1px;
+  background:var(--brass); transform:scaleX(0); transform-origin:var(--o,left);
+  transition:transform .35s var(--ease);
+}
+html[dir="rtl"] .nav-links a::after{ --o:right; }
+.nav-links a:hover{ color:var(--on-ink); }
+.nav-links a:hover::after{ transform:scaleX(1); }
+
+.lang{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.14em;
+  background:transparent; color:var(--on-ink);
+  border:1px solid var(--rule-ink); border-radius:999px;
+  padding:7px 14px; cursor:pointer;
+  transition:border-color .25s var(--ease), color .25s var(--ease);
+}
+.lang:hover{ border-color:var(--brass); color:var(--brass-hi); }
+
+.nav-toggle{ display:none; }
+
+@media (max-width:900px){
+  .nav-links{
+    position:fixed; inset-block-start:68px; inset-inline:0;
+    background:var(--ink-2); border-block-end:1px solid var(--rule-ink);
+    flex-direction:column; align-items:flex-start;
+    gap:0; padding:8px var(--gut) 22px;
+    transform:translateY(-8px); opacity:0; pointer-events:none;
+    transition:opacity .25s var(--ease), transform .25s var(--ease);
+  }
+  .nav-links a{ width:100%; padding-block:13px; border-block-end:1px solid var(--rule-ink-s); font-size:15px; }
+  .nav[data-open="true"] .nav-links{ opacity:1; transform:none; pointer-events:auto; }
+  .nav-toggle{
+    display:inline-flex; flex-direction:column; gap:4px; justify-content:center;
+    width:40px; height:34px; background:none; border:1px solid var(--rule-ink);
+    border-radius:2px; cursor:pointer; padding:0 10px;
+  }
+  .nav-toggle i{ display:block; height:1px; background:var(--on-ink); transition:transform .3s var(--ease); }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{ position:relative; overflow:hidden; padding-block:clamp(56px,8vw,104px) 0; }
+.hero-glow{
+  position:absolute; z-index:0; pointer-events:none;
+  inset-block-start:-30%; inset-inline-end:-14%;
+  width:min(880px,92vw); aspect-ratio:1;
+  background:radial-gradient(circle at 50% 50%, rgba(196,145,63,.26), rgba(196,145,63,.06) 42%, transparent 68%);
+  filter:blur(14px);
+}
+.hero-grid{
+  position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(to right, var(--rule-ink-s) 1px, transparent 1px);
+  background-size:calc(100% / 6) 100%;
+  mask-image:linear-gradient(to bottom, #000, transparent 82%);
+  -webkit-mask-image:linear-gradient(to bottom, #000, transparent 82%);
+}
+.hero-in{ position:relative; z-index:1; }
+
+.hero-top{
+  display:flex; flex-wrap:wrap; gap:14px 26px;
+  align-items:center; justify-content:space-between;
+  padding-block-end:clamp(26px,4vw,54px);
+}
+.hero-top .mono{ color:var(--on-ink-dim); }
+.hero-top .mono b{ color:var(--brass); font-weight:500; }
+
+.hero-h1{ max-width:15ch; }
+.hero-h1 em{ font-style:italic; color:var(--brass-hi); }
+
+.hero-body{
+  display:grid; gap:clamp(24px,4vw,64px);
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  align-items:end;
+  padding-block:clamp(26px,3.6vw,48px) clamp(34px,5vw,72px);
+}
+@media (max-width:860px){ .hero-body{ grid-template-columns:1fr; align-items:start; } }
+
+.hero-side{ padding-block-start:6px; }
+.hero-side .mono{ color:var(--on-ink-dim); display:block; margin-block-end:12px; }
+.hero-side .facts li{ border-block-end:1px solid var(--rule-ink-s); }
+.hero-side .facts li:first-child{ border-block-start:1px solid var(--rule-ink-s); }
+@media (max-width:860px){ .hero-side{ padding-block-start:22px; } }
+
+.hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-block-start:26px; }
+
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--body); font-size:13.5px; letter-spacing:.02em;
+  padding:13px 22px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--brass); background:var(--brass); color:#120D04;
+  transition:background .28s var(--ease), color .28s var(--ease), border-color .28s var(--ease);
+}
+.btn:hover{ background:var(--brass-hi); border-color:var(--brass-hi); }
+.btn.ghost{ background:transparent; color:var(--on-ink); border-color:var(--rule-ink); }
+.btn.ghost:hover{ border-color:var(--brass); color:var(--brass-hi); background:transparent; }
+.btn .arw{ transition:transform .3s var(--ease); }
+.btn:hover .arw{ transform:translateX(4px); }
+html[dir="rtl"] .btn .arw{ transform:scaleX(-1); }
+html[dir="rtl"] .btn:hover .arw{ transform:scaleX(-1) translateX(4px); }
+
+/* hero ledger strip */
+.ledger{
+  border-block-start:1px solid var(--rule-ink);
+  display:grid; grid-template-columns:repeat(5,1fr);
+}
+.ledger .cell{
+  padding:clamp(18px,2.4vw,30px) clamp(10px,1.6vw,26px);
+  border-inline-start:1px solid var(--rule-ink-s);
+}
+.ledger .cell:first-child{ border-inline-start:0; padding-inline-start:0; }
+.ledger .fig{
+  font-family:var(--display); font-size:clamp(26px,3.3vw,46px);
+  line-height:1; font-variant-numeric:tabular-nums; display:block;
+}
+.ledger .fig .suf{ font-size:.5em; color:var(--brass); vertical-align:.55em; margin-inline-start:2px; }
+.ledger .lbl{
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--on-ink-dim); margin-block-start:10px; display:block; line-height:1.5;
+}
+@media (max-width:820px){
+  .ledger{ grid-template-columns:repeat(2,1fr); }
+  .ledger .cell{ border-inline-start:1px solid var(--rule-ink-s); border-block-start:1px solid var(--rule-ink-s); padding-inline:0 14px; }
+  .ledger .cell:nth-child(odd){ border-inline-start:0; }
+}
+
+/* ============================================================
+   CHAPTER / ABOUT (paper)
+   ============================================================ */
+.chapter{
+  display:grid; gap:clamp(26px,4vw,72px);
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+}
+@media (max-width:900px){ .chapter{ grid-template-columns:1fr; } }
+
+.values{ list-style:none; margin:clamp(26px,3vw,40px) 0 0; padding:0; }
+.values li{
+  display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:baseline;
+  padding-block:16px; border-block-start:1px solid var(--rule-paper-s);
+}
+.values li:last-child{ border-block-end:1px solid var(--rule-paper-s); }
+.values .k{ font-family:var(--mono); font-size:10px; color:var(--brass-lo); letter-spacing:.16em; }
+.values .n{ font-family:var(--display); font-size:clamp(19px,2vw,27px); }
+.values .d{ font-size:13px; color:var(--on-paper-mid); text-align:end; max-width:34ch; }
+@media (max-width:640px){
+  .values li{ grid-template-columns:auto 1fr; }
+  .values .d{ grid-column:1 / -1; text-align:start; }
+}
+
+.quote{
+  border-inline-start:2px solid var(--brass);
+  padding-inline-start:clamp(18px,2vw,28px);
+  margin:clamp(28px,3.4vw,44px) 0 0;
+}
+.quote p{
+  font-family:var(--display); font-size:clamp(21px,2.5vw,34px);
+  line-height:1.24; margin:0; text-wrap:balance;
+}
+.quote cite{
+  display:block; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; font-style:normal; color:var(--on-paper-mid); margin-block-start:16px;
+}
+
+/* ============================================================
+   DIVISIONS — the index
+   ============================================================ */
+.index{ border-block-start:1px solid var(--rule-ink); }
+.row{ border-block-end:1px solid var(--rule-ink); }
+.row-btn{
+  width:100%; background:none; border:0; cursor:pointer; color:inherit;
+  display:grid; grid-template-columns:64px minmax(0,1fr) minmax(0,.85fr) 40px;
+  gap:clamp(12px,2vw,32px); align-items:center; text-align:start;
+  padding-block:clamp(20px,2.5vw,34px); padding-inline:0;
+  font-family:inherit;
+  transition:padding-inline .4s var(--ease);
+}
+.row-btn:hover{ padding-inline-start:14px; }
+.row-code{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; color:var(--on-ink-dim); }
+.row-name{
+  font-family:var(--display); font-size:clamp(24px,3.4vw,50px); line-height:1.05;
+  transition:color .3s var(--ease);
+}
+.row-btn:hover .row-name,
+.row[data-open="true"] .row-name{ color:var(--brass-hi); }
+.row-meta{ font-size:13px; color:var(--on-ink-mid); }
+.row-plus{
+  justify-self:end; width:26px; height:26px; position:relative;
+  border:1px solid var(--rule-ink); border-radius:50%;
+}
+.row-plus::before,.row-plus::after{
+  content:""; position:absolute; inset-block-start:50%; inset-inline-start:50%;
+  width:9px; height:1px; background:var(--on-ink);
+  transform:translate(-50%,-50%);
+}
+.row-plus::after{ transform:translate(-50%,-50%) rotate(90deg); transition:transform .4s var(--ease); }
+.row[data-open="true"] .row-plus::after{ transform:translate(-50%,-50%) rotate(0deg); }
+.row[data-open="true"] .row-plus{ border-color:var(--brass); }
+
+.row-panel{
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .45s var(--ease);
+}
+.row[data-open="true"] .row-panel{ grid-template-rows:1fr; }
+.row-panel > div{ overflow:hidden; }
+.panel-in{
+  display:grid; gap:clamp(18px,3vw,52px);
+  grid-template-columns:minmax(0,.78fr) minmax(0,1.05fr) minmax(0,.9fr);
+  padding-block-end:clamp(26px,3.2vw,44px);
+}
+@media (max-width:900px){
+  .row-btn{ grid-template-columns:44px minmax(0,1fr) 30px; }
+  .row-meta{ display:none; }
+  .panel-in{ grid-template-columns:1fr; }
+}
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin-block-start:18px; }
+.chip{
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  border:1px solid var(--rule-ink); border-radius:999px; padding:6px 12px; color:var(--on-ink-mid);
+}
+.facts{ list-style:none; margin:0; padding:0; }
+.facts li{
+  display:flex; justify-content:space-between; gap:18px;
+  padding-block:11px; border-block-end:1px solid var(--rule-ink-s);
+  font-size:13.5px; color:var(--on-ink-mid);
+}
+.facts li span:last-child{ color:var(--on-ink); font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; text-align:end; }
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.rail{
+  overflow-x:auto; overflow-y:hidden;
+  padding-block-end:20px;
+  scrollbar-width:thin; scrollbar-color:var(--brass-lo) transparent;
+}
+.rail::-webkit-scrollbar{ height:3px; }
+.rail::-webkit-scrollbar-thumb{ background:var(--brass-lo); }
+.rail::-webkit-scrollbar-track{ background:var(--rule-ink-s); }
+.track{
+  display:flex; gap:0; min-width:max-content;
+  border-block-start:1px solid var(--rule-ink); margin-block-start:8px;
+}
+.stop{
+  inline-size:clamp(210px,22vw,282px);
+  padding:26px clamp(16px,2vw,30px) 6px 0;
+  padding-inline:0 clamp(16px,2vw,30px);
+  border-inline-end:1px solid var(--rule-ink-s);
+  position:relative;
+}
+.stop::before{
+  content:""; position:absolute; inset-block-start:-4px; inset-inline-start:0;
+  width:7px; height:7px; border-radius:50%; background:var(--ink); border:1px solid var(--brass);
+}
+.stop.key::before{ background:var(--brass); }
+.stop .yr{
+  font-family:var(--display); font-size:clamp(26px,2.6vw,36px); line-height:1;
+  font-variant-numeric:tabular-nums; display:block; margin-block-end:12px;
+}
+.stop.key .yr{ color:var(--brass-hi); }
+.stop p{ margin:0; font-size:13.5px; color:var(--on-ink-mid); line-height:1.5; }
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+.marquee{
+  overflow:hidden; border-block:1px solid var(--rule-ink);
+  padding-block:clamp(22px,2.6vw,34px);
+  mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent);
+}
+.mq-track{ display:flex; gap:clamp(34px,5vw,80px); width:max-content; animation:slide 42s linear infinite; }
+.marquee:hover .mq-track{ animation-play-state:paused; }
+.mq-track span{
+  font-family:var(--display); font-size:clamp(22px,2.6vw,38px);
+  color:var(--on-ink-dim); white-space:nowrap; letter-spacing:.01em;
+  transition:color .3s var(--ease);
+}
+.mq-track span:hover{ color:var(--on-ink); }
+@keyframes slide{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ============================================================
+   CAREERS + NEWS
+   ============================================================ */
+.split{
+  display:grid; gap:clamp(24px,4vw,64px);
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center;
+}
+@media (max-width:860px){ .split{ grid-template-columns:1fr; } }
+
+.cards{
+  display:grid; gap:1px; background:var(--rule-ink);
+  grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--rule-ink);
+}
+@media (max-width:860px){ .cards{ grid-template-columns:1fr; } }
+.card{
+  background:var(--ink); padding:clamp(22px,2.6vw,34px);
+  display:flex; flex-direction:column; gap:14px; min-height:230px;
+  transition:background .3s var(--ease);
+}
+.card:hover{ background:var(--ink-2); }
+.card .tag{ font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass); }
+.card h3{ font-family:var(--display); font-weight:400; font-size:clamp(19px,1.9vw,26px); line-height:1.15; margin:0; }
+.card p{ margin:0; font-size:13.5px; color:var(--on-ink-mid); }
+.card .when{ margin-block-start:auto; font-family:var(--mono); font-size:10.5px; color:var(--on-ink-dim); letter-spacing:.1em; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{ border-block-start:1px solid var(--rule-ink); padding-block:clamp(44px,5vw,72px) 26px; }
+.foot-grid{
+  display:grid; gap:clamp(26px,4vw,56px);
+  grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));
+}
+@media (max-width:900px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:560px){ .foot-grid{ grid-template-columns:1fr; } }
+.foot h4{
+  font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--on-ink-dim); margin:0 0 16px; font-weight:400;
+}
+.foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.foot ul a{ font-size:13.5px; color:var(--on-ink-mid); transition:color .25s var(--ease); }
+.foot ul a:hover{ color:var(--brass-hi); }
+.foot-mark{ font-family:var(--display); font-size:clamp(30px,4vw,54px); line-height:1; margin:0 0 18px; }
+.foot-bottom{
+  display:flex; flex-wrap:wrap; gap:14px 26px; justify-content:space-between; align-items:center;
+  margin-block-start:clamp(34px,4vw,58px); padding-block-start:22px;
+  border-block-start:1px solid var(--rule-ink-s);
+}
+.foot-bottom .mono{ color:var(--on-ink-dim); font-size:10px; }
+
+.concept-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--rule-ink); border-radius:999px; padding:7px 14px;
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--on-ink-dim);
+}
+.concept-pill i{ width:5px; height:5px; border-radius:50%; background:var(--brass); display:block; }
+
+.srcnote{
+  font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+  color:var(--on-ink-dim); margin-block-start:18px; line-height:1.7; text-transform:none;
+}
+.paper .srcnote{ color:var(--on-paper-mid); }
+
+/* ============================================================
+   MOTION — reveals only run once JS confirms support
+   ============================================================ */
+html.js .rv{ opacity:0; transform:translateY(18px); }
+html.js .rv.in{ opacity:1; transform:none; transition:opacity .8s var(--ease), transform .8s var(--ease); }
+
+html.js .hero-anim{ opacity:0; transform:translateY(22px); }
+html.js .hero-anim.in{ opacity:1; transform:none; transition:opacity .9s var(--ease), transform .9s var(--ease); }
+
+@media (prefers-reduced-motion:reduce){
+  html.js .rv,html.js .hero-anim{ opacity:1 !important; transform:none !important; }
+  .mq-track{ animation:none; }
+  *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
+
+/* ============================================================
+   PLATES — drawn imagery (Canvas). Replace with client
+   photography by swapping the <canvas> for an <img>; the
+   .plate wrapper already sets ratio, crop and caption.
+   ============================================================ */
+.plate{ position:relative; display:block; }
+.plate canvas,.plate img{
+  display:block; width:100%; height:100%;
+  object-fit:cover; border-radius:2px;
+}
+.plate-frame{
+  position:relative; overflow:hidden;
+  border:1px solid var(--rule-ink);
+  background:var(--ink-2);
+  aspect-ratio:16/9;
+}
+.paper .plate-frame{ border-color:var(--rule-paper); background:var(--paper-2); }
+.plate-cap{
+  display:flex; gap:14px; justify-content:space-between; align-items:baseline;
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--on-ink-dim); padding-block-start:12px;
+}
+.paper .plate-cap{ color:var(--on-paper-mid); }
+.plate-cap b{ color:var(--brass); font-weight:400; }
+
+.band{ padding-block:0; }
+.band .plate-frame{ aspect-ratio:21/7; border-inline:0; }
+@media (max-width:700px){ .band .plate-frame{ aspect-ratio:4/3; } }
+
+.panel-in .plate-frame{ aspect-ratio:4/3; }
+
+/* ============================================================
+   VIEWS — hash router, one artifact, two pages
+   ============================================================ */
+.view[hidden]{ display:none !important; }
+.nav-links a.here{ color:var(--on-ink); }
+.nav-links a.here::after{ transform:scaleX(1); }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid{
+  display:grid; gap:clamp(28px,4vw,72px);
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  align-items:start;
+}
+@media (max-width:920px){ .contact-grid{ grid-template-columns:1fr; } }
+
+.form{ display:flex; flex-direction:column; gap:0; }
+.field{ display:flex; flex-direction:column; gap:8px; padding-block:14px; }
+.pair{ display:grid; grid-template-columns:1fr 1fr; gap:0 clamp(16px,2.4vw,32px); }
+@media (max-width:560px){ .pair{ grid-template-columns:1fr; } }
+
+.field > label{
+  font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--on-ink-dim);
+}
+.field > label .req{ color:var(--brass); }
+
+.field input,.field select,.field textarea{
+  font-family:var(--body); font-size:15px; color:var(--on-ink);
+  background:transparent; border:0; border-block-end:1px solid var(--rule-ink);
+  padding:10px 2px; width:100%; border-radius:0;
+  transition:border-color .25s var(--ease);
+}
+html[dir="rtl"] .field input,html[dir="rtl"] .field select,html[dir="rtl"] .field textarea{ font-family:var(--arabic); }
+.field textarea{ resize:vertical; min-height:104px; line-height:1.6; }
+.field select{ appearance:none; cursor:pointer; }
+.field select option{ background:var(--ink-2); color:var(--on-ink); }
+.field input::placeholder,.field textarea::placeholder{ color:var(--on-ink-dim); }
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none; border-block-end-color:var(--brass);
+}
+.field .sel-wrap{ position:relative; }
+.field .sel-wrap::after{
+  content:"▾"; position:absolute; inset-inline-end:4px; inset-block-start:10px;
+  color:var(--brass); pointer-events:none; font-size:12px;
+}
+.err{
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:#E08C6A; min-height:0; opacity:0; transition:opacity .2s var(--ease);
+}
+.field[data-invalid="true"] input,
+.field[data-invalid="true"] select,
+.field[data-invalid="true"] textarea{ border-block-end-color:#E08C6A; }
+.field[data-invalid="true"] .err{ opacity:1; }
+
+.consent{
+  display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start;
+  padding-block:20px; border-block-start:1px solid var(--rule-ink-s);
+}
+.consent input{ width:16px; height:16px; accent-color:var(--brass); margin-block-start:3px; }
+.consent span{ font-size:13px; color:var(--on-ink-mid); line-height:1.55; }
+.consent[data-invalid="true"] span{ color:#E08C6A; }
+
+.form-foot{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; padding-block-start:8px; }
+.form-note{ font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--on-ink-dim); text-transform:uppercase; }
+
+.sent{
+  border:1px solid var(--brass); border-radius:2px;
+  padding:clamp(24px,3vw,38px); background:linear-gradient(160deg,rgba(196,145,63,.10),transparent 70%);
+}
+.sent h3{ font-family:var(--display); font-weight:400; font-size:clamp(22px,2.4vw,32px); margin:0 0 14px; }
+.sent .ref{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--brass);
+  display:block; margin-block-end:18px;
+}
+
+.office{ border-block-start:1px solid var(--rule-ink); padding-block:22px; }
+.office h3{ font-family:var(--display); font-weight:400; font-size:clamp(19px,2vw,26px); margin:0 0 6px; }
+.office address{ font-style:normal; color:var(--on-ink-mid); font-size:14px; line-height:1.7; }
+.office a{ color:var(--brass-hi); }
+.office a:hover{ text-decoration:underline; }
+
+.routes{ list-style:none; margin:0; padding:0; }
+.routes li{
+  display:grid; grid-template-columns:1fr auto; gap:14px; align-items:baseline;
+  padding-block:13px; border-block-end:1px solid var(--rule-ink-s); font-size:14px;
+}
+.routes li span:last-child{ font-family:var(--mono); font-size:11.5px; color:var(--on-ink-mid); letter-spacing:.06em; }
+.routes .tbc{ color:var(--on-ink-dim); }
+
+.disclaimer{
+  border:1px solid var(--rule-ink); border-inline-start:2px solid var(--brass);
+  padding:18px 20px; margin-block-start:clamp(26px,3vw,40px);
+}
+.disclaimer p{ margin:0; font-size:13px; color:var(--on-ink-mid); line-height:1.6; }
+.disclaimer strong{ color:var(--on-ink); font-weight:500; }
+</style>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark" data-en="Juma Al Majid" data-ar="جمعة الماجد">Juma Al Majid</span>
+      <span class="brand-sub" data-en="Holding Group" data-ar="المجموعة القابضة">Holding Group</span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#about"      data-en="About"      data-ar="من نحن">About</a>
+      <a href="#businesses" data-en="Businesses" data-ar="أعمال المجموعة">Businesses</a>
+      <a href="#history"    data-en="History"    data-ar="تاريخنا">History</a>
+      <a href="#careers"    data-en="Careers"    data-ar="الوظائف">Careers</a>
+      <a href="#news"       data-en="Newsroom"   data-ar="المركز الإعلامي">Newsroom</a>
+      <a href="#/contact"   data-en="Contact"    data-ar="اتصل بنا">Contact</a>
+    </nav>
+    <button class="lang" id="lang" type="button" aria-label="Switch language">العربية</button>
+    <button class="nav-toggle" id="navtoggle" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main class="view" id="v-home">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap hero-in">
+
+    <div class="hero-top hero-anim">
+      <p class="mono" data-en="Est. <b>1950</b> — Dubai, United Arab Emirates" data-ar="تأسست عام <b>1950</b> — دبي، الإمارات العربية المتحدة">Est. <b>1950</b> — Dubai, United Arab Emirates</p>
+      <p class="mono" data-en="Five sectors — 35+ companies" data-ar="خمسة قطاعات — أكثر من 35 شركة">Five sectors — 35+ companies</p>
+    </div>
+
+    <h1 class="display d-xl hero-h1 hero-anim"
+        data-en="Seventy-six years of <em>building</em> the Emirates."
+        data-ar="ستة وسبعون عامًا في <em>بناء</em> الإمارات.">Seventy-six years of <em>building</em> the Emirates.</h1>
+
+    <div class="hero-body">
+      <div class="hero-anim">
+        <p class="lede" data-en="From a single trading house on Dubai Creek to a group of more than thirty-five companies — automotive, consumer goods, contracting, real estate, travel and investment — serving the country that grew up alongside it." data-ar="من متجر واحد على خور دبي إلى مجموعة تضم أكثر من خمس وثلاثين شركة — السيارات والسلع الاستهلاكية والمقاولات والعقارات والسفر والاستثمار — في خدمة الوطن الذي نما معها.">From a single trading house on Dubai Creek to a group of more than thirty-five companies — automotive, consumer goods, contracting, real estate, travel and investment — serving the country that grew up alongside it.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#businesses"><span data-en="Explore the group" data-ar="استكشف المجموعة">Explore the group</span> <span class="arw">→</span></a>
+          <a class="btn ghost" href="#careers"><span data-en="Careers" data-ar="الوظائف">Careers</span></a>
+        </div>
+      </div>
+
+      <aside class="hero-side hero-anim">
+        <p class="mono" data-en="Leadership" data-ar="القيادة">Leadership</p>
+        <ul class="facts">
+          <li><span data-en="H.E. Juma Al Majid" data-ar="سعادة جمعة الماجد">H.E. Juma Al Majid</span><span data-en="Founder &amp; Chairman" data-ar="المؤسس ورئيس مجلس الإدارة">Founder &amp; Chairman</span></li>
+          <li><span data-en="Khalid Al Majid" data-ar="خالد الماجد">Khalid Al Majid</span><span data-en="Vice-Chairman" data-ar="نائب رئيس مجلس الإدارة">Vice-Chairman</span></li>
+          <li><span data-en="Tarig Shalabi" data-ar="طارق شلبي">Tarig Shalabi</span><span data-en="Group COO" data-ar="الرئيس التنفيذي للعمليات">Group COO</span></li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="ledger hero-anim">
+      <div class="cell">
+        <span class="fig"><span class="count" data-to="76">76</span></span>
+        <span class="lbl" data-en="Years in operation" data-ar="عامًا من العمل">Years in operation</span>
+      </div>
+      <div class="cell">
+        <span class="fig"><span class="count" data-to="35">35</span><span class="suf">+</span></span>
+        <span class="lbl" data-en="Companies in the group" data-ar="شركة ضمن المجموعة">Companies in the group</span>
+      </div>
+      <div class="cell">
+        <span class="fig"><span class="count" data-to="150">150</span><span class="suf">+</span></span>
+        <span class="lbl" data-en="Branches across UAE &amp; GCC" data-ar="فرعًا في الإمارات والخليج">Branches across UAE &amp; GCC</span>
+      </div>
+      <div class="cell">
+        <span class="fig"><span class="count" data-to="7500">7,500</span><span class="suf">+</span></span>
+        <span class="lbl" data-en="People employed" data-ar="موظفًا">People employed</span>
+      </div>
+      <div class="cell">
+        <span class="fig">$<span class="count" data-to="2">2</span><span class="suf">B</span></span>
+        <span class="lbl" data-en="Annual group revenue" data-ar="الإيرادات السنوية">Annual group revenue</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SKYLINE PLATE ============================ -->
+<section class="band">
+  <figure class="plate wrap rv" style="margin-block:0">
+    <div class="plate-frame"><canvas data-plate="skyline" data-seed="1950"></canvas></div>
+    <figcaption class="plate-cap">
+      <span data-en="Deira, looking across the Creek — where the first branch opened" data-ar="ديرة، عبر الخور — حيث افتُتح أول فرع">Deira, looking across the Creek — where the first branch opened</span>
+      <b data-en="Plate 01" data-ar="لوحة 01">Plate 01</b>
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ============================ ABOUT (paper) ============================ -->
+<section class="sec paper" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <p class="eyebrow rv" data-en="01 — Who we are" data-ar="01 — من نحن">01 — Who we are</p>
+        <h2 class="display d-lg rv" style="margin-top:18px" data-en="A family business that kept the country's pace." data-ar="شركة عائلية واكبت مسيرة الوطن.">A family business that kept the country's pace.</h2>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="rv">
+        <p class="body-copy" data-en="H.E. Juma Al Majid opened his first business in 1950 — twenty-one years before the union itself, and twenty-three before the dirham replaced the Gulf rupee. What followed tracked the nation almost year for year: tyres in 1958, refrigerated food distribution in 1962, building materials in 1967, and the automotive agencies — Isuzu, Hyundai, KIA — that put a generation of Emirati families on the road." data-ar="افتتح سعادة جمعة الماجد أول أعماله عام 1950، قبل أحد عشر عامًا من إصدار الدولة لعملتها، وقبل قيام الاتحاد بواحد وعشرين عامًا. وما تلا ذلك واكب مسيرة الوطن عامًا بعام.">H.E. Juma Al Majid opened his first business in 1950 — twenty-one years before the union itself, and twenty-three before the dirham replaced the Gulf rupee. What followed tracked the nation almost year for year: tyres in 1958, refrigerated food distribution in 1962, building materials in 1967, and the automotive agencies — Isuzu, Hyundai, KIA — that put a generation of Emirati families on the road.</p>
+        <p class="body-copy" data-en="The group is still family-led. Its capital is still largely reinvested at home. And its founder is known as widely for the Juma Al Majid Centre for Culture and Heritage — one of the Arab world's great manuscript libraries — as for anything he sold." data-ar="لا تزال المجموعة تُدار عائليًا، ولا يزال مؤسسها معروفًا بمركز جمعة الماجد للثقافة والتراث بقدر ما هو معروف بأعماله.">The group is still family-led. Its capital is still largely reinvested at home. And its founder is known as widely for the Juma Al Majid Centre for Culture and Heritage — one of the Arab world's great manuscript libraries — as for anything he sold.</p>
+
+        <blockquote class="quote">
+          <p data-en="&ldquo;By 2027, to make significant impact in every business we do.&rdquo;" data-ar="&rdquo;بحلول عام 2027، أن نُحدث أثرًا ملموسًا في كل عمل نقوم به.&ldquo;">&ldquo;By 2027, to make significant impact in every business we do.&rdquo;</p>
+          <cite data-en="The group's stated vision" data-ar="رؤية المجموعة">The group's stated vision</cite>
+        </blockquote>
+      </div>
+
+      <div class="rv">
+        <p class="mono" style="color:var(--brass-lo)" data-en="Values in practice" data-ar="قيمنا">Values in practice</p>
+        <ul class="values">
+          <li><span class="k">V1</span><span class="n" data-en="Leadership" data-ar="الريادة">Leadership</span><span class="d" data-en="Set the standard in every category we enter." data-ar="نضع المعيار في كل قطاع ندخله.">Set the standard in every category we enter.</span></li>
+          <li><span class="k">V2</span><span class="n" data-en="One Team" data-ar="فريق واحد">One Team</span><span class="d" data-en="Thirty-five companies, one set of obligations." data-ar="خمس وثلاثون شركة، والتزام واحد.">Thirty-five companies, one set of obligations.</span></li>
+          <li><span class="k">V3</span><span class="n" data-en="Ethical" data-ar="النزاهة">Ethical</span><span class="d" data-en="The reason agencies stay with us for fifty years." data-ar="السبب في بقاء وكالاتنا معنا خمسين عامًا.">The reason agencies stay with us for fifty years.</span></li>
+          <li><span class="k">V4</span><span class="n" data-en="Service Excellence" data-ar="التميز في الخدمة">Service Excellence</span><span class="d" data-en="Measured after the sale, not before it." data-ar="يُقاس بعد البيع لا قبله.">Measured after the sale, not before it.</span></li>
+        </ul>
+        <p class="srcnote">Mission — &ldquo;To always exceed stakeholders' expectations with a commitment to excellence.&rdquo;</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BUSINESSES ============================ -->
+<section class="sec" id="businesses">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <p class="eyebrow rv" data-en="02 — Group businesses" data-ar="02 — أعمال المجموعة">02 — Group businesses</p>
+        <h2 class="display d-lg rv" style="margin-top:18px" data-en="Five sectors. One balance sheet." data-ar="خمسة قطاعات. ميزانية واحدة.">Five sectors. One balance sheet.</h2>
+      </div>
+      <p class="lede rv" style="flex:0 1 400px;font-size:15px" data-en="Select a sector to see the companies and agencies inside it." data-ar="اختر قطاعًا لعرض الشركات والوكالات ضمنه.">Select a sector to see the companies and agencies inside it.</p>
+    </div>
+
+    <div class="index" id="index">
+
+      <article class="row" data-open="true">
+        <button class="row-btn" type="button" aria-expanded="true">
+          <span class="row-code">SEC / 01</span>
+          <span class="row-name" data-en="Commercial" data-ar="التجارية">Commercial</span>
+          <span class="row-meta" data-en="Automotive · Electronics · FMCG · Building materials" data-ar="السيارات · الإلكترونيات · السلع الاستهلاكية · مواد البناء">Automotive · Electronics · FMCG · Building materials</span>
+          <span class="row-plus" aria-hidden="true"></span>
+        </button>
+        <div class="row-panel"><div><div class="panel-in">
+          <figure class="plate" style="margin:0">
+            <div class="plate-frame"><canvas data-plate="section" data-seed="0158"></canvas></div>
+            <figcaption class="plate-cap"><span data-en="Vehicle logistics yard, Jebel Ali" data-ar="ساحة الخدمات اللوجستية للمركبات، جبل علي">Vehicle logistics yard, Jebel Ali</span><b>02</b></figcaption>
+          </figure>
+          <div>
+            <p class="body-copy" data-en="The group's oldest and largest arm. Exclusive UAE distribution for Hyundai, Genesis, KIA and Isuzu; Yokohama tyres since 1958; and, through Gulfco, refrigerated and dry consumer goods moving through supermarkets nationwide every day. GENAVCO supplies the contractors building the skyline." data-ar="أقدم وأكبر أذرع المجموعة: التوزيع الحصري لهيونداي وجينيسيس وكيا وإيسوزو، وإطارات يوكوهاما منذ عام 1958، والسلع الاستهلاكية عبر جلفكو.">The group's oldest and largest arm. Exclusive UAE distribution for Hyundai, Genesis, KIA and Isuzu; Yokohama tyres since 1958; and, through Gulfco, refrigerated and dry consumer goods moving through supermarkets nationwide every day. GENAVCO supplies the contractors building the skyline.</p>
+            <div class="chips"><span class="chip">Hyundai</span><span class="chip">Genesis</span><span class="chip">KIA</span><span class="chip">Isuzu</span><span class="chip">Yokohama</span><span class="chip">Samsung</span><span class="chip">Hitachi</span><span class="chip">Huawei</span><span class="chip">Hikvision</span></div>
+          </div>
+          <ul class="facts">
+            <li><span data-en="Operating companies" data-ar="الشركات العاملة">Operating companies</span><span data-en="Al Majid Motors · Gulfco · GENAVCO" data-ar="الماجد للسيارات · جلفكو · جينافكو">Al Majid Motors · Gulfco · GENAVCO</span></li>
+            <li><span data-en="First agency" data-ar="أول وكالة">First agency</span><span data-en="Yokohama, 1958" data-ar="يوكوهاما، 1958">Yokohama, 1958</span></li>
+            <li><span data-en="Longest partnership" data-ar="أطول شراكة">Longest partnership</span><span data-en="68 years" data-ar="68 عامًا">68 years</span></li>
+            <li><span data-en="Latest additions" data-ar="أحدث الإضافات">Latest additions</span><span data-en="Huawei &amp; Hikvision, 2024" data-ar="هواوي وهيكفيجن، 2024">Huawei &amp; Hikvision, 2024</span></li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="row">
+        <button class="row-btn" type="button" aria-expanded="false">
+          <span class="row-code">SEC / 02</span>
+          <span class="row-name" data-en="Contracting &amp; Services" data-ar="المقاولات والخدمات">Contracting &amp; Services</span>
+          <span class="row-meta" data-en="MEP · HVAC · Fire protection · Facilities management" data-ar="الأعمال الكهروميكانيكية · التكييف · الحماية من الحريق · إدارة المرافق">MEP · HVAC · Fire protection · Facilities management</span>
+          <span class="row-plus" aria-hidden="true"></span>
+        </button>
+        <div class="row-panel"><div><div class="panel-in">
+          <figure class="plate" style="margin:0">
+            <div class="plate-frame"><canvas data-plate="shaft" data-seed="1967"></canvas></div>
+            <figcaption class="plate-cap"><span data-en="Riser diagram — elevator core and MEP services" data-ar="مخطط الخدمات — نواة المصاعد والأعمال الكهروميكانيكية">Riser diagram — elevator core and MEP services</span><b>03</b></figcaption>
+          </figure>
+          <div>
+            <p class="body-copy" data-en="Turnkey electromechanical works through Al Arabia — air conditioning, fire protection, plumbing and power — plus elevators and moving systems with SIGMA, and the facilities teams that keep buildings running long after handover." data-ar="أعمال كهروميكانيكية متكاملة عبر العربية، إلى جانب المصاعد وأنظمة النقل مع سيجما، وفرق إدارة المرافق.">Turnkey electromechanical works through Al Arabia — air conditioning, fire protection, plumbing and power — plus elevators and moving systems with SIGMA, and the facilities teams that keep buildings running long after handover.</p>
+            <div class="chips"><span class="chip">Al Arabia</span><span class="chip">SIGMA Elevators</span><span class="chip">Trane</span></div>
+          </div>
+          <ul class="facts">
+            <li><span data-en="Disciplines" data-ar="التخصصات">Disciplines</span><span data-en="MEP · HVAC · Fire · FM" data-ar="كهروميكانيك · تكييف · حريق · مرافق">MEP · HVAC · Fire · FM</span></li>
+            <li><span data-en="Milestone" data-ar="إنجاز">Milestone</span><span data-en="1st SIGMA showroom in ME, 2025" data-ar="أول صالة عرض لسيجما في الشرق الأوسط، 2025">1st SIGMA showroom in ME, 2025</span></li>
+            <li><span data-en="Delivery model" data-ar="نموذج التنفيذ">Delivery model</span><span data-en="Design → Install → Maintain" data-ar="تصميم ← تنفيذ ← صيانة">Design → Install → Maintain</span></li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="row">
+        <button class="row-btn" type="button" aria-expanded="false">
+          <span class="row-code">SEC / 03</span>
+          <span class="row-name" data-en="Real Estate" data-ar="العقارات">Real Estate</span>
+          <span class="row-meta" data-en="Development · Leasing · Hospitality assets" data-ar="التطوير · التأجير · الأصول الفندقية">Development · Leasing · Hospitality assets</span>
+          <span class="row-plus" aria-hidden="true"></span>
+        </button>
+        <div class="row-panel"><div><div class="panel-in">
+          <figure class="plate" style="margin:0">
+            <div class="plate-frame"><canvas data-plate="towers" data-seed="2023"></canvas></div>
+            <figcaption class="plate-cap"><span data-en="Residential and commercial stock across the Emirates" data-ar="المخزون السكني والتجاري عبر الإمارات">Residential and commercial stock across the Emirates</span><b>04</b></figcaption>
+          </figure>
+          <div>
+            <p class="body-copy" data-en="Residential, commercial and hospitality property developed and held across the Emirates — including Jood Hotel Apartments, opened in 2023, and the group's own 160,000 sq ft GENAVCO facility at Umm Ramoul, Dubai." data-ar="عقارات سكنية وتجارية وفندقية عبر الإمارات، منها شقق جود الفندقية التي افتُتحت عام 2023.">Residential, commercial and hospitality property developed and held across the Emirates — including Jood Hotel Apartments, opened in 2023, and the group's own 160,000 sq ft GENAVCO facility at Umm Ramoul, Dubai.</p>
+            <div class="chips"><span class="chip">Jood Hotel Apartments</span><span class="chip">Umm Ramoul</span><span class="chip">Sharjah Auto Centre</span></div>
+          </div>
+          <ul class="facts">
+            <li><span data-en="Recent delivery" data-ar="أحدث تسليم">Recent delivery</span><span data-en="GENAVCO Umm Ramoul, 160,000 sq ft" data-ar="جينافكو أم رمول، 160,000 قدم مربع">GENAVCO Umm Ramoul, 160,000 sq ft</span></li>
+            <li><span data-en="Auto centre, Sharjah" data-ar="مركز السيارات، الشارقة">Auto centre, Sharjah</span><span data-en="15,892 sqm, 2018" data-ar="15,892 م²، 2018">15,892 sqm, 2018</span></li>
+            <li><span data-en="Held for" data-ar="الاحتفاظ">Held for</span><span data-en="Long-term income" data-ar="دخل طويل الأجل">Long-term income</span></li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="row">
+        <button class="row-btn" type="button" aria-expanded="false">
+          <span class="row-code">SEC / 04</span>
+          <span class="row-name" data-en="Travel &amp; Tourism" data-ar="السفر والسياحة">Travel &amp; Tourism</span>
+          <span class="row-meta" data-en="Corporate travel · Leisure · Hotel management" data-ar="سفر الأعمال · السياحة · إدارة الفنادق">Corporate travel · Leisure · Hotel management</span>
+          <span class="row-plus" aria-hidden="true"></span>
+        </button>
+        <div class="row-panel"><div><div class="panel-in">
+          <figure class="plate" style="margin:0">
+            <div class="plate-frame"><canvas data-plate="routes" data-seed="1988"></canvas></div>
+            <figcaption class="plate-cap"><span data-en="Route network flown on group corporate accounts" data-ar="شبكة الوجهات ضمن حسابات المجموعة">Route network flown on group corporate accounts</span><b>05</b></figcaption>
+          </figure>
+          <div>
+            <p class="body-copy" data-en="Sky Line Travel &amp; Tourism handles corporate and leisure travel for the group's own workforce and for clients across the UAE. The group has also held hotel management interests in Dubai, including the Taj Palace Hotel." data-ar="تتولى سكاي لاين للسفر والسياحة سفر الأعمال والسياحة للمجموعة ولعملائها في الإمارات.">Sky Line Travel &amp; Tourism handles corporate and leisure travel for the group's own workforce and for clients across the UAE. The group has also held hotel management interests in Dubai, including the Taj Palace Hotel.</p>
+            <div class="chips"><span class="chip" data-en="Sky Line Travel" data-ar="سكاي لاين للسفر">Sky Line Travel</span><span class="chip">IATA</span><span class="chip" data-en="Corporate accounts" data-ar="حسابات الشركات">Corporate accounts</span></div>
+          </div>
+          <ul class="facts">
+            <li><span data-en="Services" data-ar="الخدمات">Services</span><span data-en="Air · Hotel · Visa · MICE" data-ar="طيران · فنادق · تأشيرات · فعاليات">Air · Hotel · Visa · MICE</span></li>
+            <li><span data-en="Serves" data-ar="تخدم">Serves</span><span data-en="Group + external clients" data-ar="المجموعة وعملاء خارجيون">Group + external clients</span></li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="row">
+        <button class="row-btn" type="button" aria-expanded="false">
+          <span class="row-code">SEC / 05</span>
+          <span class="row-name" data-en="Investment" data-ar="الاستثمار">Investment</span>
+          <span class="row-meta" data-en="Portfolio · Treasury · New ventures" data-ar="المحفظة · الخزينة · المشاريع الجديدة">Portfolio · Treasury · New ventures</span>
+          <span class="row-plus" aria-hidden="true"></span>
+        </button>
+        <div class="row-panel"><div><div class="panel-in">
+          <figure class="plate" style="margin:0">
+            <div class="plate-frame"><canvas data-plate="strata" data-seed="2027"></canvas></div>
+            <figcaption class="plate-cap"><span data-en="Capital allocation across five sectors" data-ar="توزيع رأس المال على خمسة قطاعات">Capital allocation across five sectors</span><b>06</b></figcaption>
+          </figure>
+          <div>
+            <p class="body-copy" data-en="The arm that decides where seventy-six years of retained earnings go next — managing the group's portfolio, treasury and its appetite for new categories, most recently in enterprise technology and smart infrastructure." data-ar="الذراع التي تحدد وجهة أرباح ستة وسبعين عامًا — إدارة المحفظة والخزينة والتوسع في قطاعات جديدة.">The arm that decides where seventy-six years of retained earnings go next — managing the group's portfolio, treasury and its appetite for new categories, most recently in enterprise technology and smart infrastructure.</p>
+            <div class="chips"><span class="chip" data-en="Portfolio management" data-ar="إدارة المحافظ">Portfolio management</span><span class="chip" data-en="Treasury" data-ar="الخزينة">Treasury</span><span class="chip" data-en="Joint ventures" data-ar="مشاريع مشتركة">Joint ventures</span></div>
+          </div>
+          <ul class="facts">
+            <li><span data-en="Horizon" data-ar="الأفق">Horizon</span><span data-en="Generational" data-ar="عبر الأجيال">Generational</span></li>
+            <li><span data-en="Recent focus" data-ar="التركيز الحالي">Recent focus</span><span data-en="Enterprise tech · Smart infra" data-ar="تقنيات المؤسسات · البنية الذكية">Enterprise tech · Smart infra</span></li>
+          </ul>
+        </div></div></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MARQUEE ============================ -->
+<div class="marquee" aria-label="Brands represented">
+  <div class="mq-track" id="mq">
+    <span>Hyundai</span><span>KIA</span><span>Genesis</span><span>Isuzu</span><span>Yokohama</span><span>Samsung</span><span>Hitachi</span><span>General Electric</span><span>Trane</span><span>SIGMA</span><span>Huawei</span><span>Hikvision</span>
+    <span>Hyundai</span><span>KIA</span><span>Genesis</span><span>Isuzu</span><span>Yokohama</span><span>Samsung</span><span>Hitachi</span><span>General Electric</span><span>Trane</span><span>SIGMA</span><span>Huawei</span><span>Hikvision</span>
+  </div>
+</div>
+
+<!-- ============================ HISTORY ============================ -->
+<section class="sec" id="history">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <p class="eyebrow rv" data-en="03 — Our history" data-ar="03 — تاريخنا">03 — Our history</p>
+        <h2 class="display d-lg rv" style="margin-top:18px" data-en="1950 to now, in agencies won." data-ar="من 1950 حتى اليوم.">1950 to now, in agencies won.</h2>
+      </div>
+      <p class="lede rv" style="flex:0 1 340px;font-size:15px" data-en="Scroll the rail →" data-ar="← مرّر الشريط">Scroll the rail →</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="rail rv">
+      <div class="track">
+        <div class="stop key"><span class="yr">1950</span><p data-en="H.E. Juma Al Majid establishes his first trading business in Dubai." data-ar="سعادة جمعة الماجد يؤسس أول أعماله التجارية في دبي.">H.E. Juma Al Majid establishes his first trading business in Dubai.</p></div>
+        <div class="stop"><span class="yr">1958</span><p data-en="Exclusive distribution agreement signed with Yokohama Tyres." data-ar="اتفاقية توزيع حصرية مع إطارات يوكوهاما.">Exclusive distribution agreement signed with Yokohama Tyres.</p></div>
+        <div class="stop"><span class="yr">1962</span><p data-en="Gulf Trading &amp; Refrigerating Co. (Gulfco) established for FMCG." data-ar="تأسيس شركة الخليج للتجارة والتبريد (جلفكو).">Gulf Trading &amp; Refrigerating Co. (Gulfco) established for FMCG.</p></div>
+        <div class="stop"><span class="yr">1967</span><p data-en="GENAVCO founded to supply construction materials and equipment." data-ar="تأسيس جينافكو لتوريد مواد ومعدات البناء.">GENAVCO founded to supply construction materials and equipment.</p></div>
+        <div class="stop"><span class="yr">1982</span><p data-en="Exclusive UAE distribution of Isuzu commercial vehicles begins." data-ar="بدء التوزيع الحصري لمركبات إيسوزو التجارية.">Exclusive UAE distribution of Isuzu commercial vehicles begins.</p></div>
+        <div class="stop key"><span class="yr">1983</span><p data-en="Exclusive agreement with Hyundai Motor Company — still running." data-ar="اتفاقية حصرية مع هيونداي موتور — ما زالت قائمة.">Exclusive agreement with Hyundai Motor Company — still running.</p></div>
+        <div class="stop"><span class="yr">1988</span><p data-en="KIA brought to the UAE market through Al Majid Motors." data-ar="إدخال كيا إلى سوق الإمارات عبر الماجد للسيارات.">KIA brought to the UAE market through Al Majid Motors.</p></div>
+        <div class="stop"><span class="yr">2008</span><p data-en="Fifty years of partnership with Yokohama marked." data-ar="خمسون عامًا من الشراكة مع يوكوهاما.">Fifty years of partnership with Yokohama marked.</p></div>
+        <div class="stop"><span class="yr">2016</span><p data-en="Genesis, Hyundai's luxury marque, introduced to the UAE." data-ar="إطلاق جينيسيس، العلامة الفاخرة من هيونداي، في الإمارات.">Genesis, Hyundai's luxury marque, introduced to the UAE.</p></div>
+        <div class="stop"><span class="yr">2018</span><p data-en="15,892 sqm Hyundai &amp; Genesis auto centre opens in Sharjah." data-ar="افتتاح مركز هيونداي وجينيسيس في الشارقة بمساحة 15,892 م².">15,892 sqm Hyundai &amp; Genesis auto centre opens in Sharjah.</p></div>
+        <div class="stop"><span class="yr">2023</span><p data-en="160,000 sq ft GENAVCO facility opens at Umm Ramoul; Jood Hotel Apartments launched." data-ar="افتتاح منشأة جينافكو بأم رمول، وإطلاق شقق جود الفندقية.">160,000 sq ft GENAVCO facility opens at Umm Ramoul; Jood Hotel Apartments launched.</p></div>
+        <div class="stop key"><span class="yr">2024</span><p data-en="Group rebrands to Juma Al Majid Co LLC; Oracle Fusion ERP goes live." data-ar="إعادة تسمية المجموعة وتشغيل نظام أوراكل فيوجن.">Group rebrands to Juma Al Majid Co LLC; Oracle Fusion ERP goes live.</p></div>
+        <div class="stop"><span class="yr">2025</span><p data-en="Partnerships with Huawei and Hikvision; first SIGMA showroom in the Middle East." data-ar="شراكات مع هواوي وهيكفيجن، وأول صالة عرض لسيجما في الشرق الأوسط.">Partnerships with Huawei and Hikvision; first SIGMA showroom in the Middle East.</p></div>
+      </div>
+    </div>
+    <p class="srcnote rv">Timeline compiled from the group's published history and public records. Figures above to be confirmed against internal reporting before launch.</p>
+  </div>
+</section>
+
+<!-- ============================ CAREERS ============================ -->
+<section class="sec paper" id="careers">
+  <div class="wrap">
+    <div class="split">
+      <div class="rv">
+        <p class="eyebrow" data-en="04 — Careers" data-ar="04 — الوظائف">04 — Careers</p>
+        <h2 class="display d-lg" style="margin-top:18px" data-en="7,500 people. Rather more than 7,500 reasons." data-ar="7,500 موظف. وأسباب أكثر بكثير.">7,500 people. Rather more than 7,500 reasons.</h2>
+        <p class="body-copy" style="margin-top:22px" data-en="Showroom floors, workshops, warehouses, sites, trading desks and head office — the group hires across every one of its thirty-five companies, and promotes from inside them first." data-ar="صالات العرض والورش والمستودعات والمواقع والمكاتب — نوظّف في جميع شركات المجموعة الخمس والثلاثين، ونرقّي من داخلها أولًا.">Showroom floors, workshops, warehouses, sites, trading desks and head office — the group hires across every one of its thirty-five companies, and promotes from inside them first.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#/contact"><span data-en="See open roles" data-ar="الوظائف الشاغرة">See open roles</span> <span class="arw">→</span></a>
+          <a class="btn ghost" style="border-color:var(--rule-paper);color:var(--on-paper)" href="#about"><span data-en="Graduate programme" data-ar="برنامج الخريجين">Graduate programme</span></a>
+        </div>
+      </div>
+      <div class="rv">
+        <ul class="values" style="margin-top:0">
+          <li><span class="k">01</span><span class="n" data-en="Automotive &amp; Aftersales" data-ar="السيارات وخدمات ما بعد البيع">Automotive &amp; Aftersales</span><span class="d" data-en="Sales · Service · Parts" data-ar="مبيعات · خدمة · قطع غيار">Sales · Service · Parts</span></li>
+          <li><span class="k">02</span><span class="n" data-en="Supply Chain &amp; FMCG" data-ar="سلسلة الإمداد">Supply Chain &amp; FMCG</span><span class="d" data-en="Warehousing · Distribution" data-ar="تخزين · توزيع">Warehousing · Distribution</span></li>
+          <li><span class="k">03</span><span class="n" data-en="Engineering &amp; MEP" data-ar="الهندسة">Engineering &amp; MEP</span><span class="d" data-en="Site · Design · QA/QC" data-ar="مواقع · تصميم · ضبط الجودة">Site · Design · QA/QC</span></li>
+          <li><span class="k">04</span><span class="n" data-en="Corporate &amp; Technology" data-ar="الشؤون المؤسسية والتقنية">Corporate &amp; Technology</span><span class="d" data-en="Finance · HR · ERP · Data" data-ar="مالية · موارد بشرية · أنظمة · بيانات">Finance · HR · ERP · Data</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ NEWS ============================ -->
+<section class="sec" id="news">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-title">
+        <p class="eyebrow rv" data-en="05 — Newsroom" data-ar="05 — المركز الإعلامي">05 — Newsroom</p>
+        <h2 class="display d-lg rv" style="margin-top:18px" data-en="Latest from the group" data-ar="آخر الأخبار">Latest from the group</h2>
+      </div>
+      <a class="btn ghost rv" href="#/contact"><span data-en="All news" data-ar="كل الأخبار">All news</span> <span class="arw">→</span></a>
+    </div>
+
+    <div class="cards rv">
+      <article class="card">
+        <span class="tag" data-en="Partnership" data-ar="شراكة">Partnership</span>
+        <h3 data-en="Huawei and Hikvision join the group's technology portfolio" data-ar="هواوي وهيكفيجن ضمن محفظة المجموعة التقنية">Huawei and Hikvision join the group's technology portfolio</h3>
+        <p data-en="Two strategic distribution partnerships extend the commercial division into enterprise networking and smart security." data-ar="شراكتان استراتيجيتان توسّعان القطاع التجاري نحو الشبكات والأمن الذكي.">Two strategic distribution partnerships extend the commercial division into enterprise networking and smart security.</p>
+        <span class="when" data-en="2024 — 2025" data-ar="2024 — 2025">2024 — 2025</span>
+      </article>
+      <article class="card">
+        <span class="tag" data-en="Operations" data-ar="العمليات">Operations</span>
+        <h3 data-en="Oracle Fusion ERP goes live across group companies" data-ar="تشغيل نظام أوراكل فيوجن في شركات المجموعة">Oracle Fusion ERP goes live across group companies</h3>
+        <p data-en="A single financial and supply-chain backbone replaces decades of separate systems built company by company." data-ar="عمود فقري مالي ولوجستي موحّد يحلّ محل أنظمة منفصلة تراكمت عبر العقود.">A single financial and supply-chain backbone replaces decades of separate systems built company by company.</p>
+        <span class="when">2024</span>
+      </article>
+      <article class="card">
+        <span class="tag" data-en="Retail" data-ar="التجزئة">Retail</span>
+        <h3 data-en="First SIGMA elevator showroom in the Middle East opens" data-ar="افتتاح أول صالة عرض لمصاعد سيجما في الشرق الأوسط">First SIGMA elevator showroom in the Middle East opens</h3>
+        <p data-en="Specifiers can now walk cabins, finishes and control systems before they commit to a building's vertical transport." data-ar="يمكن للمختصين معاينة الكبائن والتشطيبات وأنظمة التحكم قبل اعتمادها.">Specifiers can now walk cabins, finishes and control systems before they commit to a building's vertical transport.</p>
+        <span class="when">2025</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ CONTACT (view) ============================ -->
+<main class="view" id="v-contact" hidden>
+  <section class="sec" id="contact-top">
+    <div class="wrap">
+
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="eyebrow" data-en="06 — Contact" data-ar="06 — اتصل بنا">06 — Contact</p>
+          <h1 class="display d-lg" style="margin-top:18px" data-en="Reach the right desk, first time." data-ar="تواصل مع القسم المعني من أول مرة.">Reach the right desk, first time.</h1>
+        </div>
+        <p class="lede" style="flex:0 1 400px;font-size:15px" data-en="Thirty-five companies share one front door. Tell us which part of the group you need and the enquiry is routed before anyone reads it." data-ar="خمس وثلاثون شركة وباب واحد. اختر الجهة المعنية ليُوجَّه طلبك مباشرة.">Thirty-five companies share one front door. Tell us which part of the group you need and the enquiry is routed before anyone reads it.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- ---------------- form ---------------- -->
+        <div>
+          <form class="form" id="cform" novalidate>
+            <div class="pair">
+              <div class="field" data-for="name">
+                <label for="f-name" data-en="Full name <span class=&quot;req&quot;>*</span>" data-ar="الاسم الكامل <span class=&quot;req&quot;>*</span>">Full name <span class="req">*</span></label>
+                <input id="f-name" name="name" type="text" autocomplete="name" placeholder="—" aria-describedby="e-name">
+                <span class="err" id="e-name" data-en="Please enter your name" data-ar="يرجى إدخال الاسم">Please enter your name</span>
+              </div>
+              <div class="field" data-for="email">
+                <label for="f-email" data-en="Email <span class=&quot;req&quot;>*</span>" data-ar="البريد الإلكتروني <span class=&quot;req&quot;>*</span>">Email <span class="req">*</span></label>
+                <input id="f-email" name="email" type="email" autocomplete="email" placeholder="—" aria-describedby="e-email">
+                <span class="err" id="e-email" data-en="Enter a valid email address" data-ar="يرجى إدخال بريد إلكتروني صحيح">Enter a valid email address</span>
+              </div>
+            </div>
+
+            <div class="pair">
+              <div class="field" data-for="company">
+                <label for="f-company" data-en="Company / organisation" data-ar="الشركة أو الجهة">Company / organisation</label>
+                <input id="f-company" name="company" type="text" autocomplete="organization" placeholder="—">
+                <span class="err">&nbsp;</span>
+              </div>
+              <div class="field" data-for="phone">
+                <label for="f-phone" data-en="Phone" data-ar="رقم الهاتف">Phone</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+971 —">
+                <span class="err">&nbsp;</span>
+              </div>
+            </div>
+
+            <div class="field" data-for="topic">
+              <label for="f-topic" data-en="Which part of the group? <span class=&quot;req&quot;>*</span>" data-ar="أي جهة في المجموعة؟ <span class=&quot;req&quot;>*</span>">Which part of the group? <span class="req">*</span></label>
+              <div class="sel-wrap">
+                <select id="f-topic" name="topic" aria-describedby="e-topic">
+                  <option value="" data-en="Select an enquiry type" data-ar="اختر نوع الطلب">Select an enquiry type</option>
+                  <option value="group" data-en="General group enquiry" data-ar="استفسار عام">General group enquiry</option>
+                  <option value="commercial" data-en="Commercial — automotive, electronics, FMCG" data-ar="التجارية — السيارات والإلكترونيات والسلع">Commercial — automotive, electronics, FMCG</option>
+                  <option value="contracting" data-en="Contracting &amp; Services — MEP, HVAC, elevators" data-ar="المقاولات والخدمات">Contracting &amp; Services — MEP, HVAC, elevators</option>
+                  <option value="realestate" data-en="Real Estate — leasing and development" data-ar="العقارات — التأجير والتطوير">Real Estate — leasing and development</option>
+                  <option value="travel" data-en="Travel &amp; Tourism" data-ar="السفر والسياحة">Travel &amp; Tourism</option>
+                  <option value="investment" data-en="Investment &amp; partnerships" data-ar="الاستثمار والشراكات">Investment &amp; partnerships</option>
+                  <option value="supplier" data-en="Supplier registration" data-ar="تسجيل الموردين">Supplier registration</option>
+                  <option value="careers" data-en="Careers" data-ar="الوظائف">Careers</option>
+                  <option value="media" data-en="Media &amp; press" data-ar="الإعلام والصحافة">Media &amp; press</option>
+                </select>
+              </div>
+              <span class="err" id="e-topic" data-en="Choose where this should go" data-ar="يرجى اختيار الجهة المعنية">Choose where this should go</span>
+            </div>
+
+            <div class="field" data-for="message">
+              <label for="f-message" data-en="Message <span class=&quot;req&quot;>*</span>" data-ar="الرسالة <span class=&quot;req&quot;>*</span>">Message <span class="req">*</span></label>
+              <textarea id="f-message" name="message" rows="4" placeholder="—" aria-describedby="e-message"></textarea>
+              <span class="err" id="e-message" data-en="Tell us a little more — 20 characters or so" data-ar="يرجى كتابة تفاصيل أكثر">Tell us a little more — 20 characters or so</span>
+            </div>
+
+            <label class="consent" id="f-consent-wrap" data-for="consent">
+              <input id="f-consent" name="consent" type="checkbox">
+              <span data-en="I agree that Juma Al Majid Holding Group may store and use these details to respond to my enquiry." data-ar="أوافق على أن تحتفظ مجموعة جمعة الماجد القابضة بهذه البيانات للرد على طلبي.">I agree that Juma Al Majid Holding Group may store and use these details to respond to my enquiry.</span>
+            </label>
+
+            <div class="form-foot">
+              <button class="btn" type="submit"><span data-en="Send enquiry" data-ar="إرسال الطلب">Send enquiry</span> <span class="arw">→</span></button>
+              <span class="form-note" data-en="Typical reply — 2 business days" data-ar="مدة الرد المعتادة — يومان">Typical reply — 2 business days</span>
+            </div>
+          </form>
+
+          <div class="sent" id="csent" hidden>
+            <h3 data-en="Enquiry received." data-ar="تم استلام طلبك.">Enquiry received.</h3>
+            <span class="ref" id="cref">REF —</span>
+            <p class="body-copy" id="csum" style="font-size:14px"></p>
+            <div class="form-foot">
+              <button class="btn ghost" type="button" id="cagain"><span data-en="Send another" data-ar="إرسال طلب آخر">Send another</span></button>
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            <p><strong data-en="Fraud notice." data-ar="تنبيه بشأن الاحتيال.">Fraud notice.</strong> <span data-en="The group never asks for payment in exchange for employment, and never requests fees to process an application. Report anyone claiming otherwise." data-ar="لا تطلب المجموعة أي مبالغ مقابل التوظيف أو لمعالجة الطلبات. يُرجى الإبلاغ عن أي جهة تدّعي خلاف ذلك.">The group never asks for payment in exchange for employment, and never requests fees to process an application. Report anyone claiming otherwise.</span></p>
+          </div>
+        </div>
+
+        <!-- ---------------- office ---------------- -->
+        <div>
+          <figure class="plate" style="margin:0 0 8px">
+            <div class="plate-frame"><canvas data-plate="map" data-seed="156"></canvas></div>
+            <figcaption class="plate-cap">
+              <span data-en="Head office — Hor Al Anz, Dubai" data-ar="المكتب الرئيسي — هور العنز، دبي">Head office — Hor Al Anz, Dubai</span>
+              <b data-en="Plate 07" data-ar="لوحة 07">Plate 07</b>
+            </figcaption>
+          </figure>
+
+          <div class="office">
+            <h3 data-en="Head office" data-ar="المكتب الرئيسي">Head office</h3>
+            <address>
+              Juma Al Majid Holding Group<br>
+              Hor Al Anz Area, P.O. Box 156<br>
+              Dubai, United Arab Emirates<br>
+              <a href="tel:+97142665210">+971 4 266 5210</a>
+            </address>
+          </div>
+
+          <div class="office">
+            <h3 data-en="Where enquiries land" data-ar="وجهة الطلبات">Where enquiries land</h3>
+            <ul class="routes">
+              <li><span data-en="Group &amp; general" data-ar="عام">Group &amp; general</span><span>+971 4 266 5210</span></li>
+              <li><span data-en="Supplier registration" data-ar="تسجيل الموردين">Supplier registration</span><span class="tbc">ext. — · to confirm</span></li>
+              <li><span data-en="Media &amp; press" data-ar="الإعلام والصحافة">Media &amp; press</span><span class="tbc">ext. — · to confirm</span></li>
+              <li><span data-en="Careers" data-ar="الوظائف">Careers</span><span class="tbc">ext. — · to confirm</span></li>
+              <li><span data-en="Working week" data-ar="أيام العمل">Working week</span><span class="tbc" data-en="Sun – Thu · hours to confirm" data-ar="الأحد – الخميس · تُحدد الأوقات">Sun – Thu · hours to confirm</span></li>
+            </ul>
+            <p class="srcnote" data-en="Address and main line as published by the group. Department extensions and hours to be supplied by the client." data-ar="العنوان والخط الرئيسي كما نشرتها المجموعة. تُستكمل التحويلات وأوقات العمل من العميل.">Address and main line as published by the group. Department extensions and hours to be supplied by the client.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="foot" id="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <p class="foot-mark display" data-en="Juma Al Majid" data-ar="جمعة الماجد">Juma Al Majid</p>
+        <p class="body-copy" style="font-size:14px;max-width:34ch" data-en="Head office — Dubai, United Arab Emirates. Operating across the UAE and the wider GCC since 1950." data-ar="المكتب الرئيسي — دبي، الإمارات العربية المتحدة. نعمل في الإمارات ودول الخليج منذ عام 1950.">Head office — Dubai, United Arab Emirates. Operating across the UAE and the wider GCC since 1950.</p>
+      </div>
+      <div>
+        <h4 data-en="About" data-ar="من نحن">About</h4>
+        <ul>
+          <li><a href="#about" data-en="Our history" data-ar="تاريخنا">Our history</a></li>
+          <li><a href="#about" data-en="The founder" data-ar="المؤسس">The founder</a></li>
+          <li><a href="#about" data-en="Leadership" data-ar="القيادة">Leadership</a></li>
+          <li><a href="#about" data-en="Vision &amp; values" data-ar="الرؤية والقيم">Vision &amp; values</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Businesses" data-ar="الأعمال">Businesses</h4>
+        <ul>
+          <li><a href="#businesses" data-en="Commercial" data-ar="التجارية">Commercial</a></li>
+          <li><a href="#businesses" data-en="Contracting &amp; Services" data-ar="المقاولات والخدمات">Contracting &amp; Services</a></li>
+          <li><a href="#businesses" data-en="Real Estate" data-ar="العقارات">Real Estate</a></li>
+          <li><a href="#businesses" data-en="Travel &amp; Tourism" data-ar="السفر والسياحة">Travel &amp; Tourism</a></li>
+          <li><a href="#businesses" data-en="Investment" data-ar="الاستثمار">Investment</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Connect" data-ar="تواصل">Connect</h4>
+        <ul>
+          <li><a href="#careers" data-en="Careers" data-ar="الوظائف">Careers</a></li>
+          <li><a href="#news" data-en="Newsroom" data-ar="المركز الإعلامي">Newsroom</a></li>
+          <li><a href="#/contact" data-en="LinkedIn" data-ar="لينكدإن">LinkedIn</a></li>
+          <li><a href="#/contact" data-en="YouTube" data-ar="يوتيوب">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span class="concept-pill"><i></i> Unofficial design concept — not affiliated with Juma Al Majid Holding Group</span>
+      <span class="mono" data-en="Design study · 2026" data-ar="دراسة تصميم · 2026">Design study · 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- reveal on scroll ---------- */
+  var revealables = document.querySelectorAll(".rv, .hero-anim");
+  if (!("IntersectionObserver" in window) || reduce) {
+    revealables.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+    revealables.forEach(function(el){ io.observe(el); });
+
+    /* hero plays as an orchestrated load sequence, not on scroll */
+    document.querySelectorAll(".hero-anim").forEach(function(el, i){
+      io.unobserve(el);
+      el.style.transitionDelay = (0.08 * i + 0.05) + "s";
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add("in"); }); });
+    });
+  }
+
+  /* ---------- ledger counters ---------- */
+  function runCount(el){
+    var target = parseFloat(el.getAttribute("data-to"));
+    if (reduce || !isFinite(target)) { return; }
+    var dur = 1400, t0 = null;
+    function frame(t){
+      if (t0 === null) t0 = t;
+      var p = Math.min((t - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var v = Math.round(target * eased);
+      el.textContent = v.toLocaleString("en-US");
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    el.textContent = "0";
+    requestAnimationFrame(frame);
+  }
+  var counters = document.querySelectorAll(".count");
+  if ("IntersectionObserver" in window && !reduce){
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ runCount(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+
+  /* ---------- sector index (accordion) ---------- */
+  var rows = document.querySelectorAll("#index .row");
+  rows.forEach(function(row){
+    var btn = row.querySelector(".row-btn");
+    btn.addEventListener("click", function(){
+      var open = row.getAttribute("data-open") === "true";
+      rows.forEach(function(r){
+        r.setAttribute("data-open", "false");
+        r.querySelector(".row-btn").setAttribute("aria-expanded", "false");
+      });
+      if (!open){
+        row.setAttribute("data-open", "true");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* ---------- mobile nav ---------- */
+  var nav = document.getElementById("nav");
+  var toggle = document.getElementById("navtoggle");
+  toggle.addEventListener("click", function(){
+    var open = nav.getAttribute("data-open") === "true";
+    nav.setAttribute("data-open", open ? "false" : "true");
+    toggle.setAttribute("aria-expanded", open ? "false" : "true");
+  });
+  document.getElementById("navlinks").addEventListener("click", function(e){
+    if (e.target.tagName === "A"){ nav.setAttribute("data-open", "false"); toggle.setAttribute("aria-expanded","false"); }
+  });
+
+  /* ---------- plates: drawn imagery on canvas ---------- */
+  var INK_A = "#101820", INK_B = "#0A0F12";
+  var BRASS = "196,145,63", LIGHT = "243,241,236";
+
+  function mulberry32(a){
+    return function(){
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function ground(c,w,h){
+    var g = c.createLinearGradient(0,0,0,h);
+    g.addColorStop(0, INK_A); g.addColorStop(1, INK_B);
+    c.fillStyle = g; c.fillRect(0,0,w,h);
+  }
+  function glow(c,w,h,x,y,r,a){
+    var g = c.createRadialGradient(x,y,0,x,y,r);
+    g.addColorStop(0,"rgba("+BRASS+","+a+")");
+    g.addColorStop(1,"rgba("+BRASS+",0)");
+    c.fillStyle = g; c.fillRect(0,0,w,h);
+  }
+  function hair(c,a){ c.strokeStyle="rgba("+BRASS+","+a+")"; c.lineWidth=1; }
+  function pale(c,a){ c.strokeStyle="rgba("+LIGHT+","+a+")"; c.lineWidth=1; }
+
+  /* Deira skyline across the Creek */
+  function skyline(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.74,h*0.66,h*1.35,0.22);
+    var hz = h*0.80;
+    /* disc low over the water */
+    c.beginPath(); c.arc(w*0.74,h*0.44,h*0.10,0,6.2832);
+    c.fillStyle="rgba("+BRASS+",0.16)"; c.fill();
+    hair(c,0.45); c.stroke();
+
+    function layer(base, alpha, stroke, jitter){
+      var x = -20;
+      while (x < w+20){
+        var bw = 14 + rnd()*54;
+        var bh = base * (0.42 + rnd()*jitter);
+        c.fillStyle = "rgba(10,15,18,"+alpha+")";
+        c.fillRect(x, hz-bh, bw, bh);
+        if (stroke){
+          hair(c, 0.28);
+          c.beginPath(); c.moveTo(x, hz-bh); c.lineTo(x+bw, hz-bh); c.stroke();
+          pale(c, 0.07);
+          c.strokeRect(x+.5, hz-bh+.5, bw-1, bh);
+        }
+        x += bw + 2 + rnd()*10;
+      }
+    }
+    layer(h*0.46, 0.55, false, 0.9);
+    layer(h*0.40, 0.80, true, 1.0);
+
+    /* the tall one, stepped */
+    var sx = w*0.615, sw = 22 + w*0.014, sy = hz;
+    for (var i=0;i<7;i++){
+      var sh = h*0.085, ww = sw*(1 - i*0.11);
+      c.fillStyle="rgba(10,15,18,0.92)";
+      c.fillRect(sx-ww/2, sy-sh, ww, sh);
+      pale(c,0.12); c.strokeRect(sx-ww/2+.5, sy-sh+.5, ww-1, sh);
+      sy -= sh;
+    }
+    hair(c,0.55);
+    c.beginPath(); c.moveTo(sx, sy); c.lineTo(sx, sy - h*0.07); c.stroke();
+
+    /* lit windows */
+    c.fillStyle = "rgba(227,190,124,0.30)";
+    for (var k=0;k<160;k++){
+      var wx = rnd()*w, wy = hz - rnd()*h*0.34;
+      if (rnd() > 0.55) c.fillRect(wx, wy, 1.6, 1.6);
+    }
+    /* water */
+    hair(c,0.5); c.beginPath(); c.moveTo(0,hz); c.lineTo(w,hz); c.stroke();
+    for (var r=0;r<16;r++){
+      var ry = hz + 4 + r*((h-hz)/16);
+      pale(c, 0.05 + rnd()*0.04);
+      c.beginPath(); c.moveTo(rnd()*w*0.4, ry); c.lineTo(rnd()*w*0.5 + w*0.45, ry); c.stroke();
+    }
+  }
+
+  /* street map — Hor Al Anz, with a locator */
+  function map(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.5,h*0.5,h*1.1,0.10);
+    /* blocks */
+    var cols=[0], x=0;
+    while (x < w){ x += w*(0.07 + rnd()*0.10); cols.push(x); }
+    var rows=[0], y=0;
+    while (y < h){ y += h*(0.11 + rnd()*0.14); rows.push(y); }
+    for (var i=0;i<cols.length-1;i++){
+      for (var j=0;j<rows.length-1;j++){
+        c.fillStyle = "rgba("+LIGHT+","+(0.030 + rnd()*0.055).toFixed(3)+")";
+        c.fillRect(cols[i]+3, rows[j]+3, (cols[i+1]-cols[i])-6, (rows[j+1]-rows[j])-6);
+      }
+    }
+    pale(c,0.20);
+    cols.forEach(function(cx){ c.beginPath(); c.moveTo(cx,0); c.lineTo(cx,h); c.stroke(); });
+    rows.forEach(function(ry){ c.beginPath(); c.moveTo(0,ry); c.lineTo(w,ry); c.stroke(); });
+    /* arterial road */
+    hair(c,0.40); c.lineWidth=2;
+    c.beginPath(); c.moveTo(0,h*0.74); c.lineTo(w*0.58,h*0.30); c.lineTo(w,h*0.20); c.stroke();
+    c.lineWidth=1;
+    /* the creek */
+    c.save();
+    c.beginPath(); c.moveTo(-10,h*1.10); c.lineTo(-10,h*0.99);
+    c.bezierCurveTo(w*0.32,h*0.86,w*0.52,h*1.04,w+10,h*0.88);
+    c.lineTo(w+10,h*1.10); c.closePath();
+    c.fillStyle="rgba(120,150,160,0.10)"; c.fill();
+    pale(c,0.26); c.stroke();
+    c.restore(); c.lineWidth=1;
+    /* locator */
+    var px = w*0.44, py = h*0.52;
+    hair(c,0.9);
+    c.beginPath(); c.arc(px,py,5,0,6.2832); c.fillStyle="rgba("+BRASS+",0.95)"; c.fill();
+    hair(c,0.55);
+    c.beginPath(); c.arc(px,py,15,0,6.2832); c.stroke();
+    hair(c,0.28);
+    c.beginPath(); c.arc(px,py,29,0,6.2832); c.stroke();
+    c.beginPath(); c.moveTo(px,0); c.lineTo(px,py-31); c.moveTo(px,py+31); c.lineTo(px,h);
+    c.moveTo(0,py); c.lineTo(px-31,py); c.moveTo(px+31,py); c.lineTo(w,py);
+    hair(c,0.16); c.setLineDash([2,5]); c.stroke(); c.setLineDash([]);
+  }
+
+  /* vehicle logistics yard */
+  function section(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.3,h*0.15,h*1.2,0.12);
+    pale(c,0.07);
+    for (var g=0; g<w; g+=Math.max(18,w/26)){ c.beginPath(); c.moveTo(g,0); c.lineTo(g,h); c.stroke(); }
+    /* shed */
+    var sx=w*0.06, sy=h*0.12, sw=w*0.88, sh=h*0.22;
+    pale(c,0.16); c.strokeRect(sx,sy,sw,sh);
+    c.fillStyle="rgba(10,15,18,0.6)"; c.fillRect(sx,sy,sw,sh);
+    hair(c,0.35); c.beginPath(); c.moveTo(sx,sy); c.lineTo(sx+sw*0.5,sy-h*0.07); c.lineTo(sx+sw,sy); c.stroke();
+    for (var d=1;d<7;d++){
+      var dx = sx + sw*(d/7);
+      pale(c,0.12); c.beginPath(); c.moveTo(dx,sy+sh*0.35); c.lineTo(dx,sy+sh); c.stroke();
+    }
+    /* parked rows */
+    var rows2=4;
+    for (var r=0;r<rows2;r++){
+      var ry = h*0.46 + r*h*0.135, cw = w*0.052 + r*w*0.004, ch = h*0.055;
+      for (var xx=w*0.05; xx<w*0.95; xx+=cw*1.35){
+        var on = rnd()>0.16;
+        c.fillStyle = on ? "rgba("+LIGHT+",0.055)" : "rgba("+BRASS+",0.22)";
+        c.fillRect(xx, ry, cw, ch);
+        pale(c, on?0.13:0.0);
+        if(on) c.strokeRect(xx+.5, ry+.5, cw-1, ch-1);
+      }
+      hair(c,0.10); c.setLineDash([1,4]);
+      c.beginPath(); c.moveTo(0, ry+ch+h*0.035); c.lineTo(w, ry+ch+h*0.035); c.stroke(); c.setLineDash([]);
+    }
+  }
+
+  /* riser / MEP section */
+  function shaft(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.68,h*0.5,h*1.0,0.12);
+    var bx=w*0.10, bw=w*0.80, top=h*0.08, bot=h*0.94, floors=9;
+    pale(c,0.15); c.strokeRect(bx,top,bw,bot-top);
+    for (var f=1; f<floors; f++){
+      var fy = top + (bot-top)*(f/floors);
+      pale(c,0.10); c.beginPath(); c.moveTo(bx,fy); c.lineTo(bx+bw,fy); c.stroke();
+      c.fillStyle="rgba("+LIGHT+",0.02)"; c.fillRect(bx,fy,bw,(bot-top)/floors);
+    }
+    /* core */
+    var cx=bx+bw*0.30, cw2=bw*0.13;
+    c.fillStyle="rgba("+BRASS+",0.08)"; c.fillRect(cx,top,cw2,bot-top);
+    hair(c,0.40); c.strokeRect(cx,top,cw2,bot-top);
+    /* car */
+    var carY = top+(bot-top)*0.42;
+    c.fillStyle="rgba("+BRASS+",0.55)"; c.fillRect(cx+3,carY,cw2-6,(bot-top)/floors-6);
+    hair(c,0.6);
+    c.beginPath(); c.moveTo(cx+cw2/2,top); c.lineTo(cx+cw2/2,carY); c.stroke();
+    /* duct runs */
+    for (var d2=1; d2<floors; d2+=2){
+      var dy = top + (bot-top)*(d2/floors) + 7;
+      hair(c,0.22); c.setLineDash([5,4]);
+      c.beginPath(); c.moveTo(cx+cw2, dy); c.lineTo(bx+bw-w*0.04, dy);
+      c.lineTo(bx+bw-w*0.04, dy + (bot-top)/floors*0.55); c.stroke(); c.setLineDash([]);
+      c.fillStyle="rgba("+BRASS+",0.5)"; c.fillRect(bx+bw-w*0.045, dy + (bot-top)/floors*0.55, 4, 4);
+    }
+  }
+
+  /* residential + commercial elevations */
+  function towers(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.5,h*0.9,h*1.2,0.14);
+    var base=h*0.94, specs=[[0.14,0.20,0.52],[0.40,0.24,0.80],[0.70,0.19,0.62]];
+    specs.forEach(function(s,i){
+      var x=w*s[0], tw=w*s[1], th=h*s[2], y=base-th;
+      c.fillStyle="rgba(10,15,18,0.85)"; c.fillRect(x,y,tw,th);
+      pale(c,0.16); c.strokeRect(x+.5,y+.5,tw-1,th-1);
+      var rows3=Math.round(th/(h*0.055));
+      for (var r=1;r<rows3;r++){
+        var ry=y+th*(r/rows3);
+        pale(c,0.09); c.beginPath(); c.moveTo(x,ry); c.lineTo(x+tw,ry); c.stroke();
+        for (var q=0;q<4;q++){
+          if (rnd()>0.55){
+            c.fillStyle="rgba(227,190,124,"+(0.10+rnd()*0.25).toFixed(2)+")";
+            c.fillRect(x+tw*(0.10+q*0.22), ry+3, tw*0.14, th/rows3-7);
+          }
+        }
+      }
+      hair(c, i===1?0.6:0.3);
+      c.beginPath(); c.moveTo(x,y); c.lineTo(x+tw,y); c.stroke();
+    });
+    hair(c,0.45); c.beginPath(); c.moveTo(0,base); c.lineTo(w,base); c.stroke();
+    pale(c,0.06);
+    for (var t=0;t<w;t+=14){ c.beginPath(); c.moveTo(t,base); c.lineTo(t-8,h); c.stroke(); }
+  }
+
+  /* corporate route network */
+  function routes(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.5,h*0.62,h*1.1,0.13);
+    var hub={x:w*0.30,y:h*0.62}, pts=[];
+    for (var i=0;i<7;i++){
+      pts.push({ x:w*(0.42+rnd()*0.52), y:h*(0.16+rnd()*0.66) });
+    }
+    pts.forEach(function(p,i){
+      var mx=(hub.x+p.x)/2, my=Math.min(hub.y,p.y)-h*(0.12+rnd()*0.16);
+      hair(c, 0.18+ (i%3===0?0.28:0));
+      c.setLineDash(i%2 ? [3,5] : []);
+      c.beginPath(); c.moveTo(hub.x,hub.y); c.quadraticCurveTo(mx,my,p.x,p.y); c.stroke();
+      c.setLineDash([]);
+      c.beginPath(); c.arc(p.x,p.y,2.5,0,6.2832);
+      c.fillStyle="rgba("+LIGHT+",0.5)"; c.fill();
+    });
+    c.beginPath(); c.arc(hub.x,hub.y,5,0,6.2832);
+    c.fillStyle="rgba("+BRASS+",0.95)"; c.fill();
+    hair(c,0.5); c.beginPath(); c.arc(hub.x,hub.y,13,0,6.2832); c.stroke();
+    pale(c,0.10); c.beginPath(); c.moveTo(0,h*0.86); c.lineTo(w,h*0.86); c.stroke();
+  }
+
+  /* capital allocation, five sectors */
+  function strata(c,w,h,rnd){
+    ground(c,w,h);
+    glow(c,w,h,w*0.8,h*0.2,h*1.0,0.12);
+    var base=h*0.88, n=5, gap=w*0.03, bw=(w*0.82 - gap*(n-1))/n, x0=w*0.09;
+    var vals=[0.86,0.58,0.46,0.30,0.22];
+    for (var i=0;i<n;i++){
+      var x=x0+i*(bw+gap), bh=(base-h*0.12)*vals[i];
+      c.fillStyle="rgba("+LIGHT+",0.045)"; c.fillRect(x, base-bh, bw, bh);
+      pale(c,0.12); c.strokeRect(x+.5, base-bh+.5, bw-1, bh-1);
+      var seg=Math.max(2,Math.round(bh/(h*0.09)));
+      for (var s2=1;s2<seg;s2++){
+        pale(c,0.07);
+        c.beginPath(); c.moveTo(x, base-bh*(s2/seg)); c.lineTo(x+bw, base-bh*(s2/seg)); c.stroke();
+      }
+      hair(c,0.7); c.beginPath(); c.moveTo(x, base-bh); c.lineTo(x+bw, base-bh); c.stroke();
+      c.fillStyle="rgba("+BRASS+",0.85)"; c.fillRect(x, base-bh-2, bw*0.18, 2);
+    }
+    hair(c,0.35); c.beginPath(); c.moveTo(w*0.05,base); c.lineTo(w*0.95,base); c.stroke();
+    pale(c,0.10);
+    for (var t=0;t<5;t++){
+      var ty=h*0.12+(base-h*0.12)*(t/4);
+      c.setLineDash([2,6]); c.beginPath(); c.moveTo(w*0.05,ty); c.lineTo(w*0.95,ty); c.stroke(); c.setLineDash([]);
+    }
+  }
+
+  var PLATES = { skyline:skyline, map:map, section:section, shaft:shaft, towers:towers, routes:routes, strata:strata };
+
+  function drawPlates(){
+    document.querySelectorAll("canvas[data-plate]").forEach(function(cv){
+      var box = cv.parentNode.getBoundingClientRect();
+      var w = Math.round(box.width), h = Math.round(box.height);
+      if (!w || !h) return;
+      if (cv.dataset.w === String(w) && cv.dataset.h === String(h)) return;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = w*dpr; cv.height = h*dpr;
+      cv.dataset.w = w; cv.dataset.h = h;
+      var c = cv.getContext("2d");
+      c.setTransform(dpr,0,0,dpr,0,0);
+      var fn = PLATES[cv.getAttribute("data-plate")] || skyline;
+      fn(c, w, h, mulberry32(parseInt(cv.getAttribute("data-seed"),10) || 7));
+    });
+  }
+  var rt;
+  window.addEventListener("resize", function(){
+    clearTimeout(rt); rt = setTimeout(drawPlates, 180);
+  });
+  rows.forEach(function(row){
+    row.querySelector(".row-btn").addEventListener("click", function(){
+      setTimeout(drawPlates, 60); setTimeout(drawPlates, 480);
+    });
+  });
+
+  /* ---------- router: one file, two pages ---------- */
+  var vHome = document.getElementById("v-home");
+  var vContact = document.getElementById("v-contact");
+  var navAnchors = document.querySelectorAll(".nav-links a");
+
+  function showAll(view){
+    view.querySelectorAll(".rv, .hero-anim").forEach(function(el){ el.classList.add("in"); });
+  }
+  function route(){
+    var h = location.hash || "";
+    var onContact = h.indexOf("#/contact") === 0;
+
+    vHome.hidden = onContact;
+    vContact.hidden = !onContact;
+    navAnchors.forEach(function(a){
+      a.classList.toggle("here", onContact && a.getAttribute("href") === "#/contact");
+    });
+
+    if (onContact){
+      showAll(vContact);
+      window.scrollTo(0,0);
+    } else {
+      var id = h.replace(/^#/, "");
+      if (id && id.charAt(0) !== "/"){
+        var t = document.getElementById(id);
+        if (t) requestAnimationFrame(function(){
+          t.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        });
+      } else if (h.indexOf("#/") === 0){
+        window.scrollTo(0,0);
+      }
+    }
+    requestAnimationFrame(drawPlates);
+  }
+  window.addEventListener("hashchange", route);
+
+  /* ---------- contact form ---------- */
+  var cform = document.getElementById("cform");
+  if (cform){
+    var sent = document.getElementById("csent");
+    var TOPICS = {};
+    cform.topic.querySelectorAll("option").forEach(function(o){ TOPICS[o.value] = o.textContent.trim(); });
+
+    function mark(name, bad){
+      var f = cform.querySelector('[data-for="'+name+'"]');
+      if (!f) return;
+      f.setAttribute("data-invalid", bad ? "true" : "false");
+      var ctrl = f.querySelector("input,select,textarea");
+      if (ctrl) ctrl.setAttribute("aria-invalid", bad ? "true" : "false");
+    }
+    var checks = {
+      name:    function(v){ return v.trim().length >= 2; },
+      email:   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); },
+      topic:   function(v){ return v !== ""; },
+      message: function(v){ return v.trim().length >= 20; }
+    };
+
+    Object.keys(checks).forEach(function(k){
+      var ctrl = cform.elements[k];
+      ctrl.addEventListener("input",  function(){ if (ctrl.dataset.touched) mark(k, !checks[k](ctrl.value)); });
+      ctrl.addEventListener("change", function(){ ctrl.dataset.touched = "1"; mark(k, !checks[k](ctrl.value)); });
+      ctrl.addEventListener("blur",   function(){ ctrl.dataset.touched = "1"; mark(k, !checks[k](ctrl.value)); });
+    });
+
+    cform.addEventListener("submit", function(e){
+      e.preventDefault();
+      var first = null;
+      Object.keys(checks).forEach(function(k){
+        var ctrl = cform.elements[k];
+        ctrl.dataset.touched = "1";
+        var bad = !checks[k](ctrl.value);
+        mark(k, bad);
+        if (bad && !first) first = ctrl;
+      });
+      var cw = document.getElementById("f-consent-wrap");
+      var badConsent = !cform.elements.consent.checked;
+      cw.setAttribute("data-invalid", badConsent ? "true" : "false");
+      if (badConsent && !first) first = cform.elements.consent;
+
+      if (first){ first.focus(); return; }
+
+      var ref = "AM-" + new Date().getFullYear() + "-" +
+                String(Math.floor(Math.random()*9000)+1000);
+      document.getElementById("cref").textContent = "REF " + ref;
+      document.getElementById("csum").textContent =
+        "Routed to " + (TOPICS[cform.elements.topic.value] || "the group") +
+        ". A reply goes to " + cform.elements.email.value.trim() +
+        ". Nothing was actually sent — this page is a design concept.";
+      cform.hidden = true;
+      sent.hidden = false;
+      sent.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    });
+
+    document.getElementById("cagain").addEventListener("click", function(){
+      cform.reset();
+      cform.querySelectorAll("[data-invalid]").forEach(function(f){ f.setAttribute("data-invalid","false"); });
+      sent.hidden = true; cform.hidden = false;
+      cform.elements.name.focus();
+    });
+  }
+
+  /* ---------- EN / AR ---------- */
+  var langBtn = document.getElementById("lang");
+  var isAR = false;
+  langBtn.addEventListener("click", function(){
+    isAR = !isAR;
+    root.setAttribute("dir", isAR ? "rtl" : "ltr");
+    root.setAttribute("lang", isAR ? "ar" : "en");
+    langBtn.textContent = isAR ? "English" : "العربية";
+    document.querySelectorAll("[data-en]").forEach(function(el){
+      var v = el.getAttribute(isAR ? "data-ar" : "data-en");
+      if (v) el.innerHTML = v;
+    });
+    requestAnimationFrame(drawPlates);
+  });
+
+  /* ---------- init ---------- */
+  route();
+  drawPlates();
+  window.addEventListener("load", drawPlates);
+})();
+</script>
