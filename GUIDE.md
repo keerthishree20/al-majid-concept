@@ -6,6 +6,7 @@ AI chat and ask questions about the project without sharing the repository.
 
 **Repository:** https://github.com/keerthishree20/al-majid-concept
 **Live:** https://keerthishree20.github.io/al-majid-concept/
+**All projects:** https://github.com/keerthishree20
 
 ---
 
